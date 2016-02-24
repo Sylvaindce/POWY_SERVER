@@ -1,0 +1,16 @@
+{
+  "name": "POWY_SERVER",
+  "version": "0.0.1",
+  "description": "BLE SERVER",
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "dependencies": {
+    "bleno": ">0.1.4"
+  }
+}
