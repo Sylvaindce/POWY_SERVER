@@ -1,6 +1,6 @@
 var util = require('util');
 var os = require('os');
-var exec = require('child_process').exec;
+var r = require('child_process');
 
 var bleno = require('bleno');
 
@@ -28,18 +28,14 @@ util.inherits(BatteryLevelCharacteristic, Characteristic);
 
 BatteryLevelCharacteristic.prototype.onReadRequest = function(offset, callback) {
     console.log("Client Request Battery Level");
-    console.log(os.platform());
     if (os.platform() === 'linux') {
-	exec('cat /sys/class/power_supply/BAT0/capacity', function (error, stdout, stderr) {
-	    var data = stdout.toString();
-	    //var percent = data.split('\t')[1].split(';')[0];
-	    console.log(data);
-	    percent = parseInt(data, 10);
-	    //console.log(persent);
-	    callback(this.RESULT_SUCCESS, new Buffer([percent]));
-	});
+	var lvl = r.spawnSync('cat', ['/sys/class/power_supply/BAT0/capacity'], { encoding : 'utf8' });
+	lvl = lvl.stdout.toString();
+	lvl = lvl.split('\n')[0];
+	console.log("Battery level: " + lvl);
+	lvl = parseInt(lvl, 10);
+	callback(this.RESULT_SUCCESS, new Buffer([lvl]));
     } else {
-	// return hardcoded value
 	callback(this.RESULT_SUCCESS, new Buffer([98]));
     }
 };
