@@ -3,9 +3,14 @@
 ### POWY SERVER BLE EMULATOR ###
 ################################
 
-## Capteurs ##
+## Sensors ##
 - Battery info
-- Proc Temp info.
+- Proc Temp info
+
+To add sensors use the following documentations
+https://www.bluetooth.com/specifications/gatt/characteristics
+https://www.bluetooth.com/specifications/gatt/descriptors
+https://www.bluetooth.com/specifications/gatt/services
 
 
 ## Install dependencies ##
